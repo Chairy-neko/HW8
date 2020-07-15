@@ -21,7 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class VideoActivity extends AppCompatActivity {
-    private final static int PERMISSION_REQUEST_CODE = 321;
     private final static int REQUEST_CODE_RECORD = 321;
 
     private String mp4Path;
@@ -32,7 +31,7 @@ public class VideoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
         mvideoView = findViewById(R.id.videoView);
-        ActivityCompat.requestPermissions(VideoActivity.this,permissions,PERMISSION_REQUEST_CODE);
+
         SystemVideo();
         mvideoView.setOnClickListener(new View.OnClickListener(){
             @Override

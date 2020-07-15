@@ -22,7 +22,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ImageActivity extends AppCompatActivity {
-    private final static int PERMISSION_REQUEST_CAMERA_CODE = 123;
     private final static int REQUEST_CODE_TAKE_PHOTO = 123;
 
     ImageView imageView;
@@ -31,9 +30,10 @@ public class ImageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_image);
         imageView = findViewById(R.id.iv);
-        ActivityCompat.requestPermissions(ImageActivity.this,permissions,PERMISSION_REQUEST_CAMERA_CODE);
+
         openSystemCamera();
     }
 
@@ -45,7 +45,7 @@ public class ImageActivity extends AppCompatActivity {
             startActivityForResult(intent, REQUEST_CODE_TAKE_PHOTO);
     }
 
-    String[] permissions = new String[]{Manifest.permission.CAMERA};
+
 
     private String getOutputMediaPath(){
         File mediaStorageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);

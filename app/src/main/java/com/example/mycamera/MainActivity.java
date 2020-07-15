@@ -26,6 +26,9 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+    private final static int PERMISSION_REQUEST_CAMERA_CODE = 123;
+    private final static int PERMISSION_REQUEST_CODE = 321;
+
     Button btnCamera;
 
     @Override
@@ -36,7 +39,13 @@ public class MainActivity extends AppCompatActivity {
         open(R.id.btn_camera, ImageActivity.class);
         open(R.id.btn_video, VideoActivity.class);
         open(R.id.btn_my, MyCameraActivity.class);
-        }
+
+        ActivityCompat.requestPermissions(MainActivity.this,permissions,PERMISSION_REQUEST_CAMERA_CODE);
+        ActivityCompat.requestPermissions(MainActivity.this,permissions,PERMISSION_REQUEST_CODE);
+    }
+
+    String[] permissions = new String[]{Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO};
 
     private void open(int buttonId, final Class<?> clz) {
         findViewById(buttonId).setOnClickListener(new View.OnClickListener() {
