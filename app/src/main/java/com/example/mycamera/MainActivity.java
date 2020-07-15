@@ -8,6 +8,7 @@ import androidx.core.content.FileProvider;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
@@ -26,8 +27,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private final static int PERMISSION_REQUEST_CAMERA_CODE = 123;
-    private final static int PERMISSION_REQUEST_CODE = 321;
+    private final static int PERMISSION_REQUEST_CODE = 123;
 
     Button btnCamera;
 
@@ -40,17 +40,30 @@ public class MainActivity extends AppCompatActivity {
         open(R.id.btn_video, VideoActivity.class);
         open(R.id.btn_my, MyCameraActivity.class);
 
-        ActivityCompat.requestPermissions(MainActivity.this,permissions,PERMISSION_REQUEST_CAMERA_CODE);
-        ActivityCompat.requestPermissions(MainActivity.this,permissions,PERMISSION_REQUEST_CODE);
+//        ActivityCompat.requestPermissions(MainActivity.this,permissions,PERMISSION_REQUEST_CODE);
     }
 
     String[] permissions = new String[]{Manifest.permission.CAMERA,
-            Manifest.permission.RECORD_AUDIO};
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+    private boolean checkPermission(String[] spermissions){
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            for(String permission:spermissions){
+                if(checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(MainActivity.this, spermissions,PERMISSION_REQUEST_CODE);
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     private void open(int buttonId, final Class<?> clz) {
         findViewById(buttonId).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!checkPermission(permissions)) return;
                 startActivity(new Intent(MainActivity.this, clz));
             }
         });

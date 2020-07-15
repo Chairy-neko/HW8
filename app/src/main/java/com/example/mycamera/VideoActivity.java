@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class VideoActivity extends AppCompatActivity {
-    private final static int REQUEST_CODE_RECORD = 321;
+    private final static int REQUEST_CODE_RECORD = 123;
 
     private String mp4Path;
     private VideoView mvideoView;
@@ -62,8 +62,8 @@ public class VideoActivity extends AppCompatActivity {
         }
     }
 
-    String[] permissions = new String[]{Manifest.permission.CAMERA,
-    Manifest.permission.RECORD_AUDIO};
+//    String[] permissions = new String[]{Manifest.permission.CAMERA,
+//    Manifest.permission.RECORD_AUDIO};
 
     private String getOutputMediaPath(){
         File mediaStorageDir = getExternalFilesDir(Environment.DIRECTORY_MOVIES);
